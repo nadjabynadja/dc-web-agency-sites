@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { MapPin, Phone, Clock, Star, ChevronDown } from 'lucide-react';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -12,186 +13,224 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <main className="bg-white">
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 flex items-center justify-center"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=600&fit=crop)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 text-center text-white px-6">
+    <main className="bg-white overflow-x-hidden">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <motion.h1 className="text-2xl font-bold text-gray-900">Downtown Barber Shop</motion.h1>
+          <motion.a
+            href="tel:(202) 783-2145"
+            className="hidden md:block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-shadow"
+          >
+            Call Now
+          </motion.a>
+        </div>
+      </nav>
+
+      <section className="relative h-screen overflow-hidden flex items-center justify-center pt-20">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/60"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1599912676792-ba6472770ff9?w=1200&h=600&fit=crop)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            y: scrollY * 0.5
+          }}
+        />
+        
+        <div className="relative z-10 text-center text-white px-6 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block mb-4 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full"
+          >
+            <span className="text-sm font-semibold">⭐ 4.6/5 from 189 reviews</span>
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl font-bold mb-4"
+            transition={{ delay: 0.1 }}
+            className="text-7xl md:text-8xl font-black mb-6 leading-tight"
           >
-            Downtown Barber Shop
+            Downtown Barber
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-2xl mb-8 text-gray-200"
+            transition={{ delay: 0.2 }}
+            className="text-3xl md:text-4xl text-gray-100 mb-12 font-light"
           >
-            Classic haircuts
+            Classic Cuts, Modern Skills
           </motion.p>
-          <motion.a
-            href="tel:(202) 783-2145"
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="inline-block bg-yellow-500 text-black px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-400 transition"
+            transition={{ delay: 0.3 }}
+            className="flex flex-col md:flex-row gap-4 justify-center"
           >
-            Call Now: (202) 783-2145
-          </motion.a>
+            <motion.a
+              href="tel:(202) 783-2145"
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-bold text-lg shadow-2xl hover:shadow-3xl transition-all"
+            >
+              📞 Call Now
+            </motion.a>
+            <motion.a
+              href="https://maps.google.com/?q=1425+K+St+NW+Washington+DC"
+              className="px-8 py-4 bg-white/20 backdrop-blur-md text-white rounded-lg font-bold text-lg hover:bg-white/30 transition-all"
+            >
+              📍 Get Directions
+            </motion.a>
+          </motion.div>
         </div>
+
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <ChevronDown className="w-8 h-8 text-white" />
+        </motion.div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-4xl font-bold mb-6"
-          >
-            About Us
+      <section className="py-24 px-6 bg-white">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          <motion.h2 className="text-5xl font-bold mb-8 text-gray-900">
+            Where Tradition Meets Skill
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-lg text-gray-700 leading-relaxed mb-4"
-          >
-            At Downtown Barber Shop, we're committed to delivering exceptional service in Barbershop. With a rating of 4.6/5 stars from 189 happy customers, we pride ourselves on quality, attention to detail, and genuine care for our clients.
+          <motion.p className="text-xl text-gray-700 leading-relaxed mb-6">
+            Since opening our doors in Downtown DC, we've been the go-to spot for guys who know what a real barber shop should feel like. Old-school vibe, modern expertise, and every customer treated like family.
           </motion.p>
-        </div>
+          <motion.p className="text-xl text-gray-700 leading-relaxed">
+            From classic fades to hot towel shaves, we've got you covered. 4.6★ from 189 regulars — and counting.
+          </motion.p>
+        </motion.div>
       </section>
 
-      {/* Services/Menu Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-4xl font-bold mb-12 text-center"
-          >
-            Our Specialties
+      <section className="py-24 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 className="text-5xl font-bold mb-16 text-center text-gray-900">
+            What We Do Best
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h3 className="text-xl font-bold mb-2">Classic haircuts</h3>
-              <p className="text-gray-600">Premium quality service tailored to your needs.</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h3 className="text-xl font-bold mb-2">Hot towel shaves</h3>
-              <p className="text-gray-600">Premium quality service tailored to your needs.</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h3 className="text-xl font-bold mb-2">Fades</h3>
-              <p className="text-gray-600">Premium quality service tailored to your needs.</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.30000000000000004 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h3 className="text-xl font-bold mb-2">Beard grooming</h3>
-              <p className="text-gray-600">Premium quality service tailored to your needs.</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* Reviews Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-4xl font-bold mb-12 text-center"
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
           >
-            What Our Customers Say
-          </motion.h2>
-          <div className="space-y-6">
-            
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0 }}
-              className="bg-gray-50 p-6 rounded-lg border-l-4 border-yellow-500"
-            >
-              <p className="text-gray-700 italic mb-2">"Classic barbershop experience, best haircut I've had."</p>
-              <p className="text-yellow-500 text-sm font-semibold">★★★★★</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-              className="bg-gray-50 p-6 rounded-lg border-l-4 border-yellow-500"
-            >
-              <p className="text-gray-700 italic mb-2">"Quick service, reasonable prices, friendly barbers."</p>
-              <p className="text-yellow-500 text-sm font-semibold">★★★★★</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="bg-gray-50 p-6 rounded-lg border-l-4 border-yellow-500"
-            >
-              <p className="text-gray-700 italic mb-2">"Old-school vibe, modern skills. Perfect."</p>
-              <p className="text-yellow-500 text-sm font-semibold">★★★★★</p>
-            </motion.div>
-          </div>
+            {["Classic Haircuts", "Hot Towel Shaves", "Fades", "Beard Grooming"].map((s, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all group"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{s}</h3>
+                <p className="text-gray-600">Done right, every time</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Location & Hours */}
-      <section className="py-20 px-6 bg-slate-900 text-white">
+      <section className="py-24 px-6 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">Visit Us</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Location</h3>
-              <p className="text-gray-300 mb-6">1425 K St NW, Washington, DC 20005</p>
-              <h3 className="text-2xl font-bold mb-4">Hours</h3>
-              <p className="text-gray-300 whitespace-pre-line">Mon-Fri 7am-6pm, Sat 8am-5pm, Sun 9am-3pm</p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Contact</h3>
-              <a href="tel:(202) 783-2145" className="text-yellow-400 text-xl font-bold hover:underline">
-                (202) 783-2145
-              </a>
-            </div>
-          </div>
+          <motion.h2 className="text-5xl font-bold mb-16 text-center">
+            Why People Come Back
+          </motion.h2>
+
+          <motion.div
+            className="space-y-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+          >
+            {[
+              "Classic barbershop experience, best haircut I've had.",
+              "Quick service, reasonable prices, friendly barbers.",
+              "Old-school vibe, modern skills. Perfect."
+            ].map((review, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:border-blue-500/50 transition-all"
+              >
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-5 h-5 fill-blue-400 text-blue-400" />
+                  ))}
+                </div>
+                <p className="text-lg text-gray-100 italic">"{review}"</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-white py-8 px-6 text-center">
-        <p>&copy; 2024 Downtown Barber Shop. All rights reserved. Proud Downtown business.</p>
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2 className="text-5xl font-bold mb-16 text-center text-gray-900">
+            Stop By
+          </motion.h2>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+          >
+            <motion.a
+              href="tel:(202) 783-2145"
+              variants={itemVariants}
+              className="p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl text-center hover:shadow-lg transition-all"
+            >
+              <Phone className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+              <h3 className="font-bold text-gray-900 mb-2">Call</h3>
+              <p className="text-blue-600 font-semibold">(202) 783-2145</p>
+            </motion.a>
+
+            <motion.a
+              href="https://maps.google.com/?q=1425+K+St+NW+Washington+DC"
+              variants={itemVariants}
+              className="p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl text-center hover:shadow-lg transition-all"
+            >
+              <MapPin className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+              <h3 className="font-bold text-gray-900 mb-2">Visit</h3>
+              <p className="text-blue-600 font-semibold text-sm">1425 K St NW, DC 20005</p>
+            </motion.a>
+
+            <motion.div
+              variants={itemVariants}
+              className="p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl text-center"
+            >
+              <Clock className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+              <h3 className="font-bold text-gray-900 mb-2">Hours</h3>
+              <p className="text-blue-600 font-semibold text-sm">Mon-Fri 7am-6pm<br/>Sat 8am-5pm</p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <footer className="bg-gray-900 text-white py-12 px-6 text-center">
+        <p className="mb-2">&copy; 2024 Downtown Barber Shop</p>
+        <p className="text-gray-400">Proud Downtown DC barbershop • 4.6★ Rated</p>
       </footer>
     </main>
   );
